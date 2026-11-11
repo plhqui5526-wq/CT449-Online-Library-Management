@@ -1,4 +1,5 @@
 <script setup>
+    import { ref, computed } from 'vue';
     import BookCard from "@/components/BookCard.vue";
     const books = [
         {
@@ -37,10 +38,25 @@
             conLai: 0
         },
     ];
+
+    const isChecked = ref(false);
+    
+    const visibleBooks = computed(() => {
+        if(isChecked.value === false) {
+            return books;
+        }
+
+        return books.filter((book) => book.conLai > 0);
+    });
+
 </script>
 
 <template>
+    <div>
+        <input type="checkbox" id="availableBooks" v-model="isChecked"  />
+        <label for="availableBooks">Chỉ sách còn</label>
+    </div>
     <div class="book-cards-section">
-            <BookCard v-for="book in books" :key="book.MaSach" :book="book" />
+        <BookCard v-for="book in visibleBooks" :key="book.MaSach" :book="book" />
     </div>
 </template>
