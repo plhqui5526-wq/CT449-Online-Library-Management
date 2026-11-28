@@ -2,8 +2,9 @@ import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 const NhaXuatBanSchema = new Schema({
-    tenNXB: { type: String, required: true },
-    diaChi: String,
+    TenNXB: { type: String, required: true },
+    DiaChi: String,
+    NgungSuDung: { type: Boolean, default: false },
 });
 
 export default mongoose.model("NhaXuatBan", NhaXuatBanSchema);
